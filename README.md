@@ -24,4 +24,11 @@ A smart system that recommends personalized workout plans based on user preferen
 - Track user progress
 
 ---
+
+## 📸 Demo
+
+Here’s the output page of the project:
+
+![Demo Screenshot](screenshot.png)
+
 Made with ❤️ by Shalini
