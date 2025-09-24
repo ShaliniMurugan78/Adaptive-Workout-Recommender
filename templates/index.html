@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adaptive Workout Recommendation</title>
+
+  <!-- Bootstrap + icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 10px;
+    }
+    .main-card {
+      background: rgba(255, 255, 255, 0.95);
+      color: #333;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 900px;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 700;
+      color: #1e3c72;
+    }
+    textarea {
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      resize: none;
+      min-height: 150px;
+    }
+    .btn-custom {
+      background: #2a5298;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 12px;
+      padding: 12px;
+      transition: background 0.3s ease;
+    }
+    .btn-custom:hover {
+      background: #1e3c72;
+    }
+    .result-card {
+      margin-top: 30px;
+      background: #f0f8ff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .result-card h4 {
+      color: #2a5298;
+      font-weight: 700;
+    }
+    .icon-box {
+      font-size: 2rem;
+      margin-right: 15px;
+      color: #1e3c72;
+    }
+    .result-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .result-item:last-child {
+      border-bottom: none;
+    }
+    .exercise-images img,
+    .equipment-images img {
+      width: 90px;
+      height: 90px;
+      margin: 6px;
+      border-radius: 15px;
+      object-fit: cover;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease;
+    }
+    .exercise-images img:hover,
+    .equipment-images img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="main-card">
+    <h1><i class="bi bi-activity"></i> Adaptive Workout Recommendation</h1>
+
+    <form method="POST">
+      <div class="mb-3">
+        <label for="paragraph" class="form-label">Enter your details:</label>
+        <textarea class="form-control" id="paragraph" name="paragraph"
+          placeholder="Example: I am a 28-year-old male, 175 cm tall, 75 kg weight, BMI 24. Beginner level and my goal is weight loss."></textarea>
+      </div>
+      <button type="submit" class="btn btn-custom w-100">
+        <i class="bi bi-lightning-charge"></i> Get Recommendation
+      </button>
+    </form>
+
+    {% if result %}
+    <div class="result-card">
+      <h4><i class="bi bi-stars"></i> Your Recommendations:</h4>
+
+      <div class="result-item">
+        <div class="icon-box"><i class="bi bi-barbell"></i></div>
+        <div>{{ result.ex }}</div>
+      </div>
+      <div class="exercise-images d-flex flex-wrap justify-content-start">
+        {% for img in ex_images %}
+          <img src="{{ url_for('static', filename='images/' + img) }}" alt="exercise">
+        {% endfor %}
+      </div>
+
+      <div class="result-item">
+        <div class="icon-box"><i class="bi bi-egg-fried"></i></div>
+        <div>{{ result.di }}</div>
+      </div>
+
+      <div class="result-item">
+        <div class="icon-box"><i class="bi bi-tools"></i></div>
+        <div>{{ result.eq }}</div>
+      </div>
+      <div class="equipment-images d-flex flex-wrap justify-content-start">
+        {% for img in eq_images %}
+          <img src="{{ url_for('static', filename='images/' + img) }}" alt="equipment">
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
