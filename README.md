@@ -29,6 +29,6 @@ A smart system that recommends personalized workout plans based on user preferen
 
 Here’s the output page of the project:
 
-![Demo Screenshot](screenshot.png)
+![Demo Screenshot](https://github.com/ShaliniMurugan78/Adaptive-Workout-Recommender/blob/main/Output%20Screenshot.JPG)
 
 Made with ❤️ by Shalini
